@@ -1,0 +1,29 @@
+import com.bmuschko.gradle.docker.tasks.image.*
+
+plugins {
+    id "io.ratpack.ratpack-java" version "1.5.4"
+    id "com.github.johnrengelman.plugin-shadow" version "2.0.3"
+    id "com.bmuschko.docker-remote-api" version "3.2.1"
+}
+
+if (!JavaVersion.current().java8Compatible) {
+  throw new IllegalStateException("Must be built with Java 8 or higher")
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+    compile ratpack.dependency("guice")
+    runtime 'org.slf4j:slf4j-simple:1.7.10'
+}
+
+mainClassName = "ratpack.example.java.MyApp"
+
+task buildImage(type: DockerBuildImage) {
+    inputDir = new File("${projectDir}")
+    dockerFile = new File("${projectDir}/src/docker/Dockerfile")
+    tag ='test:1.0'
+}
