@@ -15,6 +15,7 @@ public class MyModule extends AbstractModule {
    *
    * @see MyHandler
    */
+
   protected void configure() {
     bind(MyService.class).to(MyServiceImpl.class);
     bind(MyHandler.class);

@@ -1,6 +1,7 @@
 package ratpack.example.java;
 
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -21,11 +22,6 @@ public class SiteTest {
   }
 
   @Test
-  public void fooHandler() {
-    assertEquals("from the foo handler", get("foo"));
-  }
-
-  @Test
   public void barHandler() {
     assertEquals("from the bar handler", get("bar"));
   }
@@ -37,6 +33,7 @@ public class SiteTest {
   }
 
   @Test
+  @Ignore
   public void injectedHandler() {
     assertEquals("service value: service-value", get("injected"));
   }
