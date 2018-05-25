@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.spark:spark-hive-thriftserver_2.11:2.0.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.spark/spark-hive-thriftserver_2.11/2.0.2/553ffa0be7c198caa471624f1d79714aeca32303/spark-hive-thriftserver_2.11-2.0.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.spark/spark-hive-thriftserver_2.11/2.0.2/f7bdd234d20cf800353664f749eaa107072ced42/spark-hive-thriftserver_2.11-2.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

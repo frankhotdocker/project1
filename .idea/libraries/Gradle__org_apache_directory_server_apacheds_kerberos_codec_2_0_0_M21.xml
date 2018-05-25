@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.directory.server:apacheds-kerberos-codec:2.0.0-M21">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.directory.server/apacheds-kerberos-codec/2.0.0-M21/590b45b392f2c8f8234b554b55887a36eed144f4/apacheds-kerberos-codec-2.0.0-M21.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.directory.server/apacheds-kerberos-codec/2.0.0-M21/e3b3afc75169d90b280deb2e7d930d9246d13dcb/apacheds-kerberos-codec-2.0.0-M21-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

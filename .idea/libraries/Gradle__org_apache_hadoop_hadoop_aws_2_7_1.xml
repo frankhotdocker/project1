@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.hadoop:hadoop-aws:2.7.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.hadoop/hadoop-aws/2.7.1/9ee9ab5af3503f9b52231d6af55a543db7f6e493/hadoop-aws-2.7.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.hadoop/hadoop-aws/2.7.1/877fda59242795e9e825ca6139d0a9eefd66b693/hadoop-aws-2.7.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

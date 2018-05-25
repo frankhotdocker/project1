@@ -22,7 +22,11 @@ public class MyServiceImpl implements MyService {
                 //.set("spark.driver.host","172.20.0.1") // same as above. This duality might disappear in a future version
                 .set("spark.cassandra.connection.host", "172.29.0.228")
                 .set("spark.cassandra.connection.port", "9042")
-                .set("deploy-mode" ,"client");
+                .set("deploy-mode" ,"client")
+                .set("spark.executor.memory", "6G")
+                .set("spark.driver.memory", "14G")
+                .set("spark.driver.maxResultSize", "10G")
+        ;
 
         SparkSession spark = SparkSession
                 .builder()

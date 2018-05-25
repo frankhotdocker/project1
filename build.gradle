@@ -35,5 +35,5 @@ dependencies {
 task buildImage(type: DockerBuildImage)  {
     inputDir = new File("${projectDir}")
     dockerFile = new File("${projectDir}/Dockerfile")
-    tag = 'test:latest'
+    tag = 'docker-registry-default.192.168.99.100.nip.io/myproject/micro:1.0'
 }

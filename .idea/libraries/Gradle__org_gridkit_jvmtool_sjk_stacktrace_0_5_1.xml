@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.gridkit.jvmtool:sjk-stacktrace:0.5.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.gridkit.jvmtool/sjk-stacktrace/0.5.1/c144e05caad1280c623c37e19ea9c3867a3566f6/sjk-stacktrace-0.5.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.gridkit.jvmtool/sjk-stacktrace/0.5.1/3e9dba365ffedd6bb17508da3a8a5cf65d8d299/sjk-stacktrace-0.5.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

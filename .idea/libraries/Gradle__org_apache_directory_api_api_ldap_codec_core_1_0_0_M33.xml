@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.directory.api:api-ldap-codec-core:1.0.0-M33">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.directory.api/api-ldap-codec-core/1.0.0-M33/7f05cd30a81106054afb7a48591bb7987a6c5c8/api-ldap-codec-core-1.0.0-M33.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.directory.api/api-ldap-codec-core/1.0.0-M33/839f178d1b0451e6b59571cc7566a4958ef1c704/api-ldap-codec-core-1.0.0-M33-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
