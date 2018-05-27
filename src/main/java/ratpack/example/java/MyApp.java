@@ -1,5 +1,9 @@
 package ratpack.example.java;
 
+import com.datastax.driver.core.Cluster;
+import com.datastax.driver.core.ResultSet;
+import com.datastax.driver.core.ResultSetFuture;
+import com.datastax.driver.core.Session;
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.SparkSession;
 import ratpack.exec.ExecResult;
@@ -23,17 +27,25 @@ import static ratpack.sse.ServerSentEvents.serverSentEvents;
 public class MyApp {
 
     public static void main(String[] args) throws Exception {
+        final String seed= "172.29.0.83";
+        Cluster.Builder builder = Cluster.builder();
+        builder.addContactPoint(seed);
+        Cluster cluster= builder.build();
+        Session session = cluster.connect("trex");
+
         ExecHarness.runSingle(e -> {
+
             Promise<Boolean> aaa = Promise.sync(() -> false);
             Promise bbb = aaa.map(x -> !x);
             bbb.then(x -> System.out.print(x));
+
         });
 
         AtomicReference<Promised<String>> ref = new AtomicReference<>(new Promised<>());
         SparkConf conf = new SparkConf(true)
                 //.set("spark.local.ip","172.20.0.1") // helps when multiple network interfaces are present. The driver must be in the same network as the master and slaves
                 //.set("spark.driver.host","172.20.0.1") // same as above. This duality might disappear in a future version
-                .set("spark.cassandra.connection.host", "172.29.0.83")
+                .set("spark.cassandra.connection.host", seed)
                 .set("spark.cassandra.connection.port", "9042")
                 .set("deploy-mode" ,"client")
                 .set("spark.executor.memory", "6G")
@@ -54,6 +66,7 @@ public class MyApp {
                 b.module(MyModule.class);
                 //b.bindInstance(SparkSession.class, spark);
                 b.add(SparkSession.class, spark);
+                b.add(Session.class, session);
             }))
             .handlers(chain -> chain
                 .get("pub/:val", ctx -> {

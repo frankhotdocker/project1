@@ -5,6 +5,9 @@ package ratpack.example.java;
  *
  * @see MyHandler
  */
+import com.datastax.driver.core.ResultSet;
+import com.datastax.driver.core.ResultSetFuture;
+import com.datastax.driver.core.Session;
 import com.google.common.collect.ImmutableMap;
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.Dataset;
@@ -19,8 +22,10 @@ import java.util.Map;
 
 public class MyServiceImpl implements MyService {
 
-    public String getValue(Context context) {
+    public Promise<String> getValue(Context context) {
         SparkSession spark=context.get(SparkSession.class);
+        Session session =context.get(Session.class);
+
         Map table = new HashMap();
         table.put( "table","decision_history_by_msisdn");
         table.put("keyspace", "trex");
@@ -39,9 +44,17 @@ public class MyServiceImpl implements MyService {
         String sql="Select count(*) from decHist";
         Dataset<Row> count = spark.sql(sql);
 
+        String statement="Select msisdn from decision_history_by_msisdn limit 2";
+
+        Promise<ResultSet> testCassandra = Promise.async(upstream -> {
+            ResultSetFuture resultSetFuture = session.executeAsync(statement);
+            upstream.accept(resultSetFuture);
+        });
+
         String result = sql + " : " + count.first().toString();
 
-        return result;
+        return testCassandra.map(resultSet -> result+ "-:-" + resultSet.one().getString("msisdn"));
+
     }
 
 }

@@ -1,5 +1,6 @@
 package ratpack.example.java;
 
+import ratpack.exec.Promise;
 import ratpack.handling.Context;
 
 /**
@@ -9,6 +10,6 @@ import ratpack.handling.Context;
  */
 public interface MyService {
 
-    String getValue(Context context);
+    Promise<String> getValue(Context context);
 
 }
