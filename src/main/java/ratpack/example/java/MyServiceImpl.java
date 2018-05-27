@@ -5,6 +5,7 @@ package ratpack.example.java;
  *
  * @see MyHandler
  */
+import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.ResultSetFuture;
 import com.datastax.driver.core.Session;
@@ -24,7 +25,9 @@ public class MyServiceImpl implements MyService {
 
     public Promise<String> getValue(Context context) {
         SparkSession spark=context.get(SparkSession.class);
-        Session session =context.get(Session.class);
+        Cluster cluster =context.get(Cluster.class);
+        Session session = cluster.connect("trex");
+
 
         Map table = new HashMap();
         table.put( "table","decision_history_by_msisdn");

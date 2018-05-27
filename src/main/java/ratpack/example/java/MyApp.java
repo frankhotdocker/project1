@@ -31,7 +31,6 @@ public class MyApp {
         Cluster.Builder builder = Cluster.builder();
         builder.addContactPoint(seed);
         Cluster cluster= builder.build();
-        Session session = cluster.connect("trex");
 
         ExecHarness.runSingle(e -> {
 
@@ -66,7 +65,7 @@ public class MyApp {
                 b.module(MyModule.class);
                 //b.bindInstance(SparkSession.class, spark);
                 b.add(SparkSession.class, spark);
-                b.add(Session.class, session);
+                b.add(Cluster.class, cluster);
             }))
             .handlers(chain -> chain
                 .get("pub/:val", ctx -> {
