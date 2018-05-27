@@ -1,5 +1,7 @@
 package ratpack.example.java;
 
+import ratpack.handling.Context;
+
 /**
  * An example service interface.
  *
@@ -7,6 +9,6 @@ package ratpack.example.java;
  */
 public interface MyService {
 
-    String getValue();
+    String getValue(Context context);
 
 }

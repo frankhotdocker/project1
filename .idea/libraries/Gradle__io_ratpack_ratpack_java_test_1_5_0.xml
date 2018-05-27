@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: io.ratpack:ratpack-java-test:1.5.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Could not find io.ratpack:ratpack-java-test:1.5.0.&#10;Searched in the following locations:&#10;    https:/jcenter.bintray.com/io/ratpack/ratpack-java-test/1.5.0/ratpack-java-test-1.5.0.pom&#10;    https:/jcenter.bintray.com/io/ratpack/ratpack-java-test/1.5.0/ratpack-java-test-1.5.0.jar&#10;    https:/repo.datastax.com/public-repos/io/ratpack/ratpack-java-test/1.5.0/ratpack-java-test-1.5.0.pom&#10;    https:/repo.datastax.com/public-repos/io/ratpack/ratpack-java-test/1.5.0/ratpack-java-test-1.5.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

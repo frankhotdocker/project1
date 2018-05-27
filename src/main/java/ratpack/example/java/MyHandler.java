@@ -23,6 +23,6 @@ public class MyHandler implements Handler {
 
   @Override
   public void handle(Context context) {
-    context.render("service value: " + myService.getValue());
+    context.render(myService.getValue(context));
   }
 }

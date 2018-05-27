@@ -23,5 +23,6 @@
 hs_err_pid*
 
 #build dir
-build/**
+build/
+out/
 
