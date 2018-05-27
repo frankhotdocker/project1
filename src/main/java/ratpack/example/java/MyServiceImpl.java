@@ -44,7 +44,7 @@ public class MyServiceImpl implements MyService {
         String sql="Select count(*) from decHist";
         Dataset<Row> count = spark.sql(sql);
 
-        String statement="Select msisdn from decision_history_by_msisdn limit 2";
+        String statement="Select msisdn from decision_history_by_msisdn limit 1";
 
         Promise<ResultSet> testCassandra = Promise.async(upstream -> {
             ResultSetFuture resultSetFuture = session.executeAsync(statement);
@@ -53,7 +53,7 @@ public class MyServiceImpl implements MyService {
 
         String result = sql + " : " + count.first().toString();
 
-        return testCassandra.map(resultSet -> result+ "-:-" + resultSet.one().getString("msisdn"));
+        return testCassandra.map(resultSet -> result+ " -:- Select msisdn from decision_history_by_msisdn limit 1 " + resultSet.one().getString("msisdn"));
 
     }
 
