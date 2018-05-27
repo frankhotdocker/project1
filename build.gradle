@@ -18,7 +18,6 @@ dependencies {
     // This is a Guice ratpack app
     compile ratpack.dependency("guice")
 
-    compile ratpack.dependency('java-test')
     compile ratpack.dependency('groovy-test')
 
     compile("com.datastax.dse:dse-spark-dependencies:5.1.6") {
