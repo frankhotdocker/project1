@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: com.datastax.dse:dse-spark-dependencies:5.1.6">
-    <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.datastax.dse/dse-spark-dependencies/5.1.6/3dff49bbdd86e61627cb0bef399c778965b25aa9/dse-spark-dependencies-5.1.6.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
