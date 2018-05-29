@@ -1,6 +1,7 @@
 package ratpack.example.java;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,12 @@ public class SiteTest {
   @After
   public void tearDown() {
     aut.close();
+  }
+
+  @Before
+  public void tearUp() {
+    System.setProperty("CASSANDRA_SEED", "172.29.0.209");
+
   }
 
   @Test

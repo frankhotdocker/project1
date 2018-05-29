@@ -27,7 +27,8 @@ import static ratpack.sse.ServerSentEvents.serverSentEvents;
 public class MyApp {
 
     public static void main(String[] args) throws Exception {
-        final String seed= "172.29.0.83";
+        String test= System.getenv("CASSANDRA_SEED");
+        final String seed= (test!=null && !test.isEmpty())?test:"localhost";
         Cluster.Builder builder = Cluster.builder();
         builder.addContactPoint(seed);
         Cluster cluster= builder.build();
