@@ -24,7 +24,7 @@ public class SiteTest {
 
   @Before
   public void tearUp() {
-    System.setProperty("CASSANDRA_SEED", "172.29.0.209");
+    System.setProperty("CASSANDRA_SEED", "172.29.0.51");
 
   }
 
@@ -41,8 +41,8 @@ public class SiteTest {
 
   @Test
   @Ignore
-  public void injectedHandler() {
-    assertEquals("service value: service-value", get("injected"));
+  public void cassandraHandler() {
+    assertEquals("service value: service-value", get("cassandra"));
   }
 
   @Test
