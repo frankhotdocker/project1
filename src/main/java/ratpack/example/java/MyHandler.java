@@ -28,15 +28,14 @@ public class MyHandler implements Handler {
     SparkSession spark = SparkSession
             .builder()
             .appName("Spark SQL examples")
-            .master("local")
+            .master("local[4]")
             .config(conf)
             .getOrCreate();
-
 
     Cluster cluster =context.get(Cluster.class);
     Session session = cluster.connect("trex");
 
-    /*
+/*
     Map table = new HashMap();
     table.put( "table","decision_history_by_msisdn");
     table.put("keyspace", "trex");
@@ -57,7 +56,7 @@ public class MyHandler implements Handler {
     String sql="Select * from decHist where bp_number='100' order by decision_ts desc limit 500";
     Dataset<Row> count = spark.sql(pSql==null||pSql.isEmpty()?sql:pSql);
 
-    String[] xxx= {"Start\n"};
+    String[] xxx= {"Start: " + (pSql==null||pSql.isEmpty()?sql:pSql) + "\n"};
     Blocking.get(() -> count.collectAsList())
             .map(ls -> {ls.forEach(row -> xxx[0]=xxx[0]+row.toString()+"\n");return xxx[0]+"End\n";})
             .then(x->context.render(x));

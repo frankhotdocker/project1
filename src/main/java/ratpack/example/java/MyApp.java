@@ -1,17 +1,42 @@
 package ratpack.example.java;
 
 import com.datastax.driver.core.Cluster;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.SparkSession;
+import ratpack.error.ServerErrorHandler;
 import ratpack.guice.Guice;
 import ratpack.handling.Chain;
+import ratpack.handling.Context;
 import ratpack.server.BaseDir;
 import ratpack.server.RatpackServer;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
 public class MyApp {
+    static public class ErrorHandler implements ServerErrorHandler {
+
+        @Override public void error(Context context, Throwable throwable) throws Exception {
+            try {
+                Map<String, String> errors = new HashMap<>();
+
+                errors.put("error", throwable.getClass().getCanonicalName());
+                errors.put("message", throwable.getMessage());
+
+                Gson gson = new GsonBuilder().serializeNulls().create();
+
+                context.getResponse().status(HttpResponseStatus.INTERNAL_SERVER_ERROR.code()).send(gson.toJson(errors));
+                throw throwable;
+            } catch (Throwable throwable1) {
+                throwable1.printStackTrace();
+            }
+        }
+
+    }
 
     public static void main(String[] args) throws Exception {
         String test= System.getenv("CASSANDRA_SEED");
@@ -34,6 +59,7 @@ public class MyApp {
             .registry(Guice.registry(r -> {
                 r.bindInstance(SparkConf.class, conf);
                 r.bindInstance(Cluster.class, cluster);
+                r.bind(ServerErrorHandler.class, ErrorHandler.class);
                 r.bind(MyHandler.class);
             }))
             .handlers(chain -> chain
