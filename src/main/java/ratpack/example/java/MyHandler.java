@@ -53,23 +53,23 @@ public class MyHandler implements Handler {
             .load();
 
     decHist.createOrReplaceTempView( "decHist");
-    String sql="Select count(*) from decHist";
+    String sql="Select * from decHist where bp_number='100' order by decision_ts desc limit 500";
     Dataset<Row> count = spark.sql(sql);
 
-//    Promise<String> decCount = Promise.async(down ->
-//                    new Thread(() -> {
-//                      down.success(sql + " : " + count.first().toString());
-//                    }).start());
+    String[] xxx= {"Start\n"};
+    Blocking.get(() -> count.collectAsList())
+            .map(ls -> {ls.forEach(row -> xxx[0]=xxx[0]+row.toString()+"\n");return xxx[0]+"End\n";})
+            .then(x->context.render(x));
 
-    String[] xxx= {""};
-    Blocking.get(() -> sql + " : " + count.first().toString()).then(x -> xxx[0]=x);
-
-    String statement="Select msisdn from decision_history_by_msisdn limit 1";
+/*
+    String statement="Select msisdn from decision_history_by_msisdn order by decision_ts desc limit 2";
     Promise<ResultSet> testCassandra = Promise.async(upstream -> {
       ResultSetFuture resultSetFuture = session.executeAsync(statement);
       upstream.accept(resultSetFuture);
     });
 
-    testCassandra.map(resultSet -> xxx[0]+ " -:- Select msisdn from decision_history_by_msisdn limit 1 " + resultSet.one().getString("msisdn")).then(x->context.render(x));
+    testCassandra.map(resultSet -> {resultSet.all().forEach(row -> xxx[0]=xxx[0]+"\n"+row.getString("msisdn"));return xxx[0]; })
+            .then(x->context.render(x));
+*/
   }
 }
