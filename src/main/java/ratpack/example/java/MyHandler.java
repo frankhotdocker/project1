@@ -45,6 +45,7 @@ public class MyHandler implements Handler {
     data.show();
     data.printSchema();
 */
+    String pSql = context.getAllPathTokens().get("sql");
 
     Dataset<Row> decHist = spark
             .read()
@@ -54,7 +55,7 @@ public class MyHandler implements Handler {
 
     decHist.createOrReplaceTempView( "decHist");
     String sql="Select * from decHist where bp_number='100' order by decision_ts desc limit 500";
-    Dataset<Row> count = spark.sql(sql);
+    Dataset<Row> count = spark.sql(pSql==null||pSql.isEmpty()?sql:pSql);
 
     String[] xxx= {"Start\n"};
     Blocking.get(() -> count.collectAsList())
