@@ -12,10 +12,17 @@ repositories {
     }
 }
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 mainClassName = "ratpack.example.java.MyApp"
 
 dependencies {
-    // This is a Guice ratpack app
+
+    compile "org.slf4j:slf4j-api:1.7.5"
+    compile "ch.qos.logback:logback-classic:1.2.3"
+    //compile 'org.slf4j:slf4j-simple:1.7.5'
+
     compile ratpack.dependency("guice")
 
     compile ratpack.dependency('groovy-test')
@@ -25,7 +32,6 @@ dependencies {
     }
 
     testCompile 'junit:junit:4.11'
-    runtime 'org.slf4j:slf4j-simple:1.7.22'
 }
 
 //distZip {
