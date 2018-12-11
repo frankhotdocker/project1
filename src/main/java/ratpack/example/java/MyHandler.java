@@ -44,6 +44,7 @@ public class MyHandler implements Handler {
     data.show();
     data.printSchema();
 */
+/*
     String pSql = context.getAllPathTokens().get("sql");
 
     Dataset<Row> decHist = spark
@@ -60,16 +61,16 @@ public class MyHandler implements Handler {
     Blocking.get(() -> count.collectAsList())
             .map(ls -> {ls.forEach(row -> xxx[0]=xxx[0]+row.toString()+"\n");return xxx[0]+"End\n";})
             .then(x->context.render(x));
+*/
 
-/*
     String statement="Select msisdn from decision_history_by_msisdn order by decision_ts desc limit 2";
     Promise<ResultSet> testCassandra = Promise.async(upstream -> {
       ResultSetFuture resultSetFuture = session.executeAsync(statement);
       upstream.accept(resultSetFuture);
     });
-
+    String[] xxx={""};
     testCassandra.map(resultSet -> {resultSet.all().forEach(row -> xxx[0]=xxx[0]+"\n"+row.getString("msisdn"));return xxx[0]; })
             .then(x->context.render(x));
-*/
+
   }
 }

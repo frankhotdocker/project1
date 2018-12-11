@@ -7,6 +7,7 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.SparkSession;
 import ratpack.error.ServerErrorHandler;
+import ratpack.exec.Promise;
 import ratpack.guice.Guice;
 import ratpack.handling.Chain;
 import ratpack.handling.Context;
@@ -38,7 +39,9 @@ public class MyApp {
 
     }
 
+
     public static void main(String[] args) throws Exception {
+
         String test= System.getenv("CASSANDRA_SEED");
         final String seed= (test!=null && !test.isEmpty())?test:"localhost";
         Cluster.Builder builder = Cluster.builder();
