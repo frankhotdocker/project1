@@ -60,7 +60,7 @@ public class MyHandler implements Handler {
 */
 /**/
     String pSql = context.getAllPathTokens().get("sql");
-
+/*
     Dataset<Row> decHist = spark
             .read()
             .format("org.apache.spark.sql.cassandra")
@@ -69,15 +69,25 @@ public class MyHandler implements Handler {
             .load();
 
     decHist.createOrReplaceTempView( "decHist");
-    String sql="Select * from decHist where solr_query='title:Afric?' limit 50";
+    String sql="Select * from decHist where solr_query='title:A*' limit 2";
     Dataset<Row> count = spark.sql(pSql==null||pSql.isEmpty()?sql:pSql);
+*/
+    String statement="Select * from wiki.solr where solr_query='title:B*' limit 2";
+    Promise<ResultSet> testCassandra = Promise.async(upstream -> {
+      ResultSetFuture resultSetFuture = session.executeAsync(pSql==null||pSql.isEmpty()?statement:pSql);
+      upstream.accept(resultSetFuture);
+    });
+    String[] xx= {"Start: " + pSql==null||pSql.isEmpty()?statement:pSql +"\n"};
 
+    testCassandra.map(resultSet -> {resultSet.all().forEach(row -> xx[0]=xx[0]+"\n"+row.toString());return xx[0]; })
+            .then(context::render);
 
+/*
     String[] xxx= {"Start: " + (pSql==null||pSql.isEmpty()?sql:pSql) + "\n"};
     Blocking.get(count::collectAsList)
             .map(ls -> {ls.forEach(row -> xxx[0]=xxx[0]+row.toString()+"\n");return xxx[0]+"End\n";})
-            .then(context::render);
-/**/
+            .then(x -> context.render(x+xx[0]));
+*/
 /*
     String statement="Select msisdn from trex.decision_history_by_msisdn limit 2";
     Promise<ResultSet> testCassandra = Promise.async(upstream -> {
