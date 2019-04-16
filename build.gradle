@@ -1,9 +1,13 @@
 import com.bmuschko.gradle.docker.tasks.image.*
 
 plugins {
-    id 'io.ratpack.ratpack-java' version '1.5.0'
+    id 'io.ratpack.ratpack-java' version '1.5.4'
     id "com.bmuschko.docker-remote-api" version "3.2.1"
+    id "java"
 }
+
+sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
     jcenter()
@@ -12,31 +16,61 @@ repositories {
     }
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
 mainClassName = "ratpack.example.java.MyApp"
 
+ext.moduleName = 'project1'
+
+configurations.all {
+//    exclude group: 'org.jboss.spec.javax.transaction', module: 'jboss-transaction-api_1.2_spec'
+    resolutionStrategy {
+        //preferProjectModules()
+        //failOnVersionConflict()
+
+        eachDependency { DependencyResolveDetails details ->
+            if (details.requested.group == 'com.github.ben-manes.caffeine:caffeine') {
+                details.useVersion '2.4.0'
+                details.because 'API breakage in higher versions'
+            }
+        }
+        
+        cacheDynamicVersionsFor 10, 'minutes'
+    }
+}
+
 dependencies {
-
-    compile "org.slf4j:slf4j-api:1.7.5"
-    compile "ch.qos.logback:logback-classic:1.2.3"
-    //compile 'org.slf4j:slf4j-simple:1.7.5'
-
+    // This is a Guice ratpack app
     compile ratpack.dependency("guice")
 
     compile ratpack.dependency('groovy-test')
 
-    compile("com.datastax.dse:dse-spark-dependencies:5.1.6") {
+    compile("com.datastax.dse:dse-spark-dependencies:6.0.2") {
         exclude group: 'io.netty'
     }
+    
+    
+    //compile "com.github.ben-manes.caffeine:caffeine:2.4.0"
+
+    // https://mvnrepository.com/artifact/io.projectreactor/reactor-core
+    //compile 'io.projectreactor:reactor-core:3.2.0.RELEASE'
+    compile group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.6'
+
+
+    // https://mvnrepository.com/artifact/com.github.zhicwu/cassandra-jdbc-driver
+    // compile 'com.github.zhicwu:cassandra-jdbc-driver:0.6.4:shaded'
 
     testCompile 'junit:junit:4.11'
+    compile 'junit:junit:4.11'
+    
+    compile group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '5.3'
+    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile group: 'ch.qos.logback', name: 'logback-access', version: '1.2.3'
+    
 }
 
 //distZip {
-    // You only need to set this if you have specified an archive version. This removes the version number
-    // from the final distribution package which makes it easier to script in your Dockerfile.
+// You only need to set this if you have specified an archive version. This removes the version number
+// from the final distribution package which makes it easier to script in your Dockerfile.
 //    archiveName = 'micro.zip'
 //}
 
