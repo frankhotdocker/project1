@@ -113,7 +113,7 @@ public class MyHandler implements Handler {
 */
 
 
-        String statement = "Select * from artemis.event where solr_query=? limit 5";
+        String statement = "Select json * from artemis.event where solr_query=? limit 5";
         String solr = "";
 
         String dfpExactId = "XX_AegiSAsLi9eQCvg6zE22dRc73lUc";
@@ -193,13 +193,13 @@ public class MyHandler implements Handler {
             logger.debug(doc.toString());
         }
 */
-        String[] xx = {"Start: " + ((pSql == null || pSql.isEmpty()) ? statement : pSql) + " solr_query" + solr + "\n"};
+//        String[] xx = {"Start: " + ((pSql == null || pSql.isEmpty()) ? statement : pSql) + " solr_query" + solr + "\n"};
+        String[] xx = {"["};
 
         testCassandra.map(resultSet -> {
-            resultSet.all().forEach(row -> xx[0] = xx[0] + "\n" + row.toString());
-            return xx[0];
-        })
-                .then(context::render);
+            resultSet.all().forEach(row -> xx[0] = xx[0] + "\n" + row.getString(0)+",");
+            return xx[0]+"{}]";
+        }).then(context::render);
 
 /*
     String[] xxx= {"Start: " + (pSql==null||pSql.isEmpty()?sql:pSql) + "\n"};
