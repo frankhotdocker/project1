@@ -31,6 +31,9 @@ import org.slf4j.LoggerFactory;
 import ratpack.exec.Promise;
 import ratpack.handling.Context;
 import ratpack.handling.Handler;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -195,10 +198,17 @@ public class MyHandler implements Handler {
 */
 //        String[] xx = {"Start: " + ((pSql == null || pSql.isEmpty()) ? statement : pSql) + " solr_query" + solr + "\n"};
 
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(ResultSet.class, new ResultSetSerializer());
+        mapper.registerModule(module);
+
+
         String[] xx = {"["};
         testCassandra.map(resultSet -> {
             resultSet.all().forEach(row -> xx[0] = xx[0] + "\n" + row.getString(0)+",");
             return xx[0]+"{\"dfp_token\":\"dummyEnde\",\"order_addresses\":[{}]}]";
+            //return mapper.writeValueAsString(resultSet);
         }).then(context::render);
 
 /*
