@@ -43,7 +43,7 @@ const app = new Vue({
         <div v-else>
           <button v-on:click="editFriend = friend.dfp_token">edit</button>
           <button v-on:click="deleteFriend(friend.dfp_token, i)">x</button>
-          {{friend.dfp_token}}
+          {{friend.dfp_token}}<br/>{{friend.order_addresses[0]}}<br/>{{friend.order_addresses[1]}}
         </div>
       </li>
     </div>

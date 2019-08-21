@@ -194,11 +194,11 @@ public class MyHandler implements Handler {
         }
 */
 //        String[] xx = {"Start: " + ((pSql == null || pSql.isEmpty()) ? statement : pSql) + " solr_query" + solr + "\n"};
-        String[] xx = {"["};
 
+        String[] xx = {"["};
         testCassandra.map(resultSet -> {
             resultSet.all().forEach(row -> xx[0] = xx[0] + "\n" + row.getString(0)+",");
-            return xx[0]+"{}]";
+            return xx[0]+"{\"dfp_token\":\"dummyEnde\",\"order_addresses\":[{}]}]";
         }).then(context::render);
 
 /*
