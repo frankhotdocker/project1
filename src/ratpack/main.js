@@ -6,17 +6,17 @@ const app = new Vue({
     },
     methods: {
       deleteFriend(id, i) {
-        fetch("http://localhost:5050/nested/" + id, {
-          method: "GET"
+        fetch("https://jsonplaceholder.typicode.com/posts/" + id, {
+          method: "DELETE"
         })
         .then(() => {
           this.friends.splice(i, 1);
         })
       },
       updateFriend(friend) {
-        fetch("http://localhost:5050/nested/" + friend.id, {
+        fetch("https://jsonplaceholder.typicode.com/posts/" + friend.id, {
           body: JSON.stringify(friend),
-          method: "POST",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
@@ -27,7 +27,7 @@ const app = new Vue({
       }
     },
     mounted() {
-      fetch("http://localhost:5050/cassandra")
+      fetch("https://jsonplaceholder.typicode.com/posts")
         .then(response => response.json())
         .then((data) => {
            this.friends = data;
@@ -36,14 +36,14 @@ const app = new Vue({
     template: `
     <div>
       <li v-for="friend, i in friends">
-        <div v-if="editFriend === friend.dfp_token">
-          <input v-on:keyup.13="updateFriend(friend)" v-model="friend.account_holder_first_name" />
+        <div v-if="editFriend === friend.userId">
+          <input v-on:keyup.enter="updateFriend(friend)" v-model="friend.title" />
           <button v-on:click="updateFriend(friend)">save</button>
         </div>
         <div v-else>
-          <button v-on:click="editFriend = friend.dfp_token">edit</button>
-          <button v-on:click="deleteFriend(friend.dfp_token, i)">x</button>
-          {{friend.dfp_token}}<br/>{{friend.account_holder_first_name}}<br/>{{friend.order_addresses[0]}}<br/>{{friend.order_addresses[1]}}
+          <button v-on:click="editFriend = friend.userId">edit</button>
+          <button v-on:click="deleteFriend(friend.userId, i)">x</button>
+          {{friend.id}}<br/>{{friend.userId}}<br/>{{friend.title}}
         </div>
       </li>
     </div>
