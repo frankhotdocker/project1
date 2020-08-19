@@ -13,7 +13,7 @@ pipeline {
                 // git 'https://github.com/frankhotdocker/project1.git'
 
                 // Run Maven on a Unix agent.
-                sh "./gradlew clean build"
+                sh "./gradlew clean build buildImage"
 
             }
         }
