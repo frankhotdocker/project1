@@ -1,5 +1,5 @@
-FROM openjdk:8-jre
-MAINTAINER frank <info@scoop-software.de>
+FROM openjdk:11-jre
+MAINTAINER frank <info@software.de>
 EXPOSE 5050
 
 ADD build/distributions/project1.tar /opt/micro-service

@@ -7,14 +7,18 @@ pipeline {
     }
 
     stages {
+
         stage('Build') {
             steps {
-                // Get some code from a GitHub repository
-                // git 'https://github.com/frankhotdocker/project1.git'
+                //git 'https://github.com/frankhotdocker/project1.git'
 
-                // Run Maven on a Unix agent.
-                sh "./gradlew clean build buildImage"
+                sh "./gradlew clean build"
+            }
+        }
 
+        stage('ImageBuild') {
+            steps {
+                sh "echo './gradlew buildImage'"
             }
         }
     }
