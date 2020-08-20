@@ -18,7 +18,7 @@ pipeline {
 
         stage('ImageBuild') {
             steps {
-                sh "echo './gradlew buildImage'"
+                sh "./gradlew buildImage"
             }
         }
     }
