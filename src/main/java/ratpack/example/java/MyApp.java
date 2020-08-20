@@ -64,7 +64,7 @@ public class MyApp {
                     });
                 })
                 .prefix("static",
-                        path -> path.fileSystem("assets/images", Chain::files)) // Bind the /static app path to the src/ratpack/assets/images dir
+                        path -> path.fileSystem("assets/", Chain::files)) // Bind the /static app path to the src/ratpack/assets/images dir
                 .prefix("home",
                             path -> path.fileSystem("./", Chain::files)) // Bind the /static app path to the src/ratpack/assets/images dir
                 .path("cassandra", MyHandler.class) // Map to a dependency injected handler

@@ -18,8 +18,8 @@ pipeline {
 
         stage('ImageBuild') {
             steps {
-                sh "./gradlew buildImage"
-                //sh "docker build -t docker-registry-default.cloud.scoop-gmbh.de/fheinen/micro:1.0 ."
+                //sh "./gradlew buildImage"
+                sh "docker build -t docker-registry-default.cloud.scoop-gmbh.de/fheinen/micro:1.0 ."
             }
         }
     }
